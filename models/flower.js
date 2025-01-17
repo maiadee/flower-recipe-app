@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema({
 
 const flowerSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  scientificName: { type: String, required: false },
+  scientific_name: { type: String, required: false },
   color: { type: String, required: true },
   season: {
     type: String,
