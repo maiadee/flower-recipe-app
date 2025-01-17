@@ -1,11 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Flower profile</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <title>Flower Profile</title>
+  </head>
+  <body>
+    <h1><%= flower.name %></h1>
+    <h2>( <%= flower.scientific_name %> )</h2>
+    <img
+      class="profile-image"
+      src="<%= flower.image_url %>"
+      alt="<%= flower.name %>"
+    />
+    <p>Season: <%= flower.season %></p>
+    <p>Colour: <%= flower.color %></p>
+    <h3>Comments</h3>
+    <ul>
+      <% flower.comments.forEach(comment => { %>
+      <li><%= comment.content %></li>
+
+      <!-- if the user posted the comment, display a delete button -->
+      <% if (user && comment.user.toString() === user._id.toString()) { %>
+      <form
+        action="/flowers/<%= flower._id %>/comments/<%= comment._id %>?_method=DELETE"
+        method="POST"
+      >
+        <button type="submit">Delete Comment</button>
+      </form>
+      <% } %> <% }) %>
+    </ul>
+    <!-- check if user is logged in -->
+    <% if (user) { %>
+    <form
+      class="comments-form"
+      action="/flowers/<%=flower._id%>/comments/"
+      method="POST"
+    >
+      <label for="comments">Comments:</label>
+      <input type="text" name="content" id="content" />
+      <button class="form-button" type="submit">Post</button>
+    </form>
+
+    <form action="/flowers/<%=flower._id%>?_method=POST" method="POST">
+      <button class="add-to-recipe-button" type="submit">
+        Add To Recipe? %>
+      </button>
+    </form>
+
+    <form action="/flowers/<%=flower._id%>?_method=POST" method="POST">
+      <button class="delete-flower-button" type="submit">
+        Delete <%= flower.name %>
+      </button>
+    </form>
+
+    <form action="/flowers/<%=flower._id%>?_method=DELETE" method="POST">
+      <button class="delete-flower-button" type="submit">
+        Delete <%= flower.name %>
+      </button>
+    </form>
+    <!-- Link to take us to the new edit page at /flower/update/:id -->
+    <a class="update-flower-link" href="/flowers/update/<%=flower._id%>"
+      >Update flower</a
+    >
+
+    <% } %>
+  </body>
 </html>

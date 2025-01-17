@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import mongooseUniqueValidator from "mongoose-unique-validator"
-import bcrypt from "bcrypt"
-import validator from "validator"
-
+import mongooseUniqueValidator from "mongoose-unique-validator";
+import bcrypt from "bcrypt";
+import validator from "validator";
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
@@ -23,7 +22,7 @@ userSchema.plugin(mongooseUniqueValidator);
 userSchema.pre("save", function (next) {
   // this = doc youre about to save
   // replace password with hashed password
-  this.password = bcrypt.hashSync(this.passwsord, bcrypt.genSaltSync());
+  this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync());
   // tell mongoose we're done
   next();
 });

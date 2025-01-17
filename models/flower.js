@@ -27,6 +27,7 @@ const flowerSchema = new mongoose.Schema({
       "winter",
     ],
   },
+  image_url: { type: String, required: true },
   comments: [commentSchema],
 });
 

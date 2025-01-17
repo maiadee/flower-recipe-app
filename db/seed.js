@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Flower from "../models/flower.js";
 import User from "../models/user.js";
-import flowers from "..data.js";
+import flowers from "../data.js";
 import Recipe from "../models/recipe.js";
 
 async function seed() {
@@ -10,7 +10,7 @@ async function seed() {
   // connect to mongoose
   const url = "mongodb://127.0.0.1:27017/";
   const dbname = "flower-recipe-db";
-  mongoose.connect(`${url}${dbname}`);
+  await mongoose.connect(`${url}${dbname}`);
 
   console.log(`connected to mongoose`);
 
@@ -53,3 +53,5 @@ async function seed() {
   await mongoose.disconnect();
   console.log(`disconnected from mongoose`);
 }
+
+seed();
