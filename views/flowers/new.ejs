@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-     <%- include('../partials/nav') %>
-    <h1>Add a new flower</h1>
-</body>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <h1>Add a New Flower</h1>
+    <form class="flower-form" action="/flower-library/new" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" />
+      <label for="scientificName">Scientific name:</label>
+      <input type="text" name="scientificName" id="scientificName" />
+      <label for="image_url">Image URL:</label>
+      <input type="text" name="image_url" id="image_url" />
+      <label for="color">Colour:</label>
+      <input type="text" name="colors" id="colors" />
+      <label for="season">Season:</label>
+      <input type="text" name="season" id="season" />
+    </form>
+  </body>
 </html>

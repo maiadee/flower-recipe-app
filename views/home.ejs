@@ -6,7 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-     <%- include('../partials/nav') %>
-    <h1>Homepage</h1>
+    <%- include('./partials/nav') %> <% if (user) { %>
+    <h1><%= user.username %>'s Flower Recipe App</h1>
+    <% } %> <% if (!user) { %>
+    <h1>Welcome To The Flower Recipe App</h1>
+    <% } %>
   </body>
 </html>
