@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <h1>Log in</h1>
-</body>
+  </head>
+  <body>
+     <%- include('../partials/nav') %>
+    <h1>Log In!</h1>
+    <form class="user-form" action="/user/login" method="POST">
+      <label for="email">Email:</label>
+      <input type="text" name="email" id="email" />
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" />
+
+      <button class="form-button" type="submit">Log in</button>
+    </form>
+    <p>Don't have an account? <a href="/user/new">Sign Up</a></p>
+  </body>
 </html>
