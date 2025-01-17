@@ -18,3 +18,8 @@ app.use("/", commentController);
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
+
+// * Connect to database using mongoose.
+const url = "mongodb://127.0.0.1:27017/";
+const dbname = "flower-recipe-db";
+mongoose.connect(`${url}${dbname}`);
