@@ -8,7 +8,7 @@
     <title>Flower Profile</title>
   </head>
   <body>
-     <%- include('../partials/nav') %>
+    <%- include('../partials/nav') %>
     <h1><%= flower.name %></h1>
     <h2>( <%= flower.scientific_name %> )</h2>
     <img
@@ -26,7 +26,7 @@
       <!-- if the user posted the comment, display a delete button -->
       <% if (user && comment.user.toString() === user._id.toString()) { %>
       <form
-        action="/flowers/<%= flower._id %>/comments/<%= comment._id %>?_method=DELETE"
+        action="/flower-library/<%= flower._id %>/comments/<%= comment._id %>?_method=DELETE"
         method="POST"
       >
         <button type="submit">Delete Comment</button>
@@ -37,7 +37,7 @@
     <% if (user) { %>
     <form
       class="comments-form"
-      action="/flowers/<%=flower._id%>/comments/"
+      action="/flower-library/<%=flower._id%>/comments"
       method="POST"
     >
       <label for="comments">Comments:</label>
@@ -45,25 +45,26 @@
       <button class="form-button" type="submit">Post</button>
     </form>
 
-    <form action="/flowers/<%=flower._id%>?_method=POST" method="POST">
-      <button class="add-to-recipe-button" type="submit">
-        Add To Recipe? %>
-      </button>
+    <form action="/flower-library/<%=flower._id%>/add-flower" method="POST">
+      <label for="choose-recipe">Add to Recipe:</label>
+      <select name="recipe" id="recipe" required>
+        <option value="" disabled selected>-- Select Recipe --</option>
+        <option value="Recipe1">Recipe 1</option>
+        <option value="Recipe2">Recipe 2</option>
+        <option value="Recipe3">Recipe 3</option>
+        <option value="Recipe4">Recipe 4</option>
+      </select>
+      <button type="submit">Add</button>
     </form>
 
-    <form action="/flowers/<%=flower._id%>?_method=POST" method="POST">
+    <form action="/flower-library/<%=flower._id%>?_method=DELETE" method="POST">
       <button class="delete-flower-button" type="submit">
         Delete <%= flower.name %>
       </button>
     </form>
 
-    <form action="/flowers/<%=flower._id%>?_method=DELETE" method="POST">
-      <button class="delete-flower-button" type="submit">
-        Delete <%= flower.name %>
-      </button>
-    </form>
     <!-- Link to take us to the new edit page at /flower/update/:id -->
-    <a class="update-flower-link" href="/flowers/update/<%=flower._id%>"
+    <a class="update-flower-link" href="/flower-library/update/<%=flower._id%>"
       >Update flower</a
     >
 

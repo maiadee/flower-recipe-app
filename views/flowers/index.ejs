@@ -21,6 +21,19 @@
         <a class="flower-link" href="/flower-library/<%= flower._id %>">
           <%= flower.name %>
         </a>
+        <% if (user) { %>
+        <form action="/flower-library/<%=flower._id%>/add-flower" method="POST">
+          <label for="choose-recipe">Add to Recipe:</label>
+          <select name="recipe" id="recipe" required>
+            <option value="" disabled selected>-- Select Recipe --</option>
+            <option value="Recipe1">Recipe 1</option>
+            <option value="Recipe2">Recipe 2</option>
+            <option value="Recipe3">Recipe 3</option>
+            <option value="Recipe4">Recipe 4</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+        <% } %>
       </li>
       <% }) %>
     </ul>

@@ -10,6 +10,7 @@ import commentController from "./controllers/commentController.js";
 import flowerController from "./controllers/flowerController.js";
 import userController from "./controllers/userController.js";
 import recipeController from "./controllers/recipeController.js";
+
 import flowers from "./data.js";
 
 import dotenv from "dotenv";
@@ -57,6 +58,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", userController);
 app.use("/", flowerController);
 app.use("/", commentController);
+app.use("/", recipeController);
 
 // listening for requests on port 3000
 app.listen(3000, () => {

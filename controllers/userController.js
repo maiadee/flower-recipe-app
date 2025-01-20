@@ -65,7 +65,7 @@ router.route("/user/login").post(async function (req, res, next) {
 router.route("/user/logout").get(async function (req, res, next) {
   try {
     req.session.destroy();
-    res.redirect("/");
+    res.redirect("/user/login");
   } catch (e) {
     next(e);
   }

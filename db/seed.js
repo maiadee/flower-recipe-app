@@ -21,22 +21,24 @@ async function seed() {
 
   // seed a user
   const user = await User.create({
-    username: "maia",
+    username: "Maia",
     email: "maia@maia.com",
     password: "Maia1234!",
   });
 
   // seed a recipe
-  const recipe = await Recipe.create({
-    name: `Recipe 1`,
-    // add user to recipe
-    user: user,
-  });
+  const recipe = await Recipe.create(
+    { name: `Recipe 1`, user: user },
+    { name: `Recipe 2`, user: user },
+    { name: `Recipe 3`, user: user },
+    { name: `Recipe 4`, user: user }
+  );
 
   // add data to database
   const newFlowers = await Flower.create(flowers);
   console.log(newFlowers);
 
+  // ! does this work?
   // seed comments
   const comment = {
     content: `test comment`,

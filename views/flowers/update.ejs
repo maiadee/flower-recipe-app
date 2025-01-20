@@ -7,6 +7,36 @@
   </head>
   <body>
     <%- include('../partials/nav') %>
-    <h1>Update a flower</h1>
+    <h1>Update <%= flower.name %></h1>
+    <form
+      class="flower-form"
+      action="/flower-library/update/<%=flower._id%>?_method=PUT"
+      method="POST"
+    >
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" value="<%=flower.name%>" />
+      <label for="scientific_name">Scientific Name:</label>
+      <input
+        type="text"
+        name="scientific_name"
+        id="scientific_name"
+        value="<%=flower.scientific_name%>"
+      />
+      <label for="image_url">Image URL:</label>
+      <input
+        type="text"
+        name="image_url"
+        id="image_url"
+        value="<%=flower.image_url%>"
+      />
+      <label for="color">Colour:</label>
+      <input type="text" name="colors" id="colours" value="<%=flower.color%>" />
+      <label for="season">Season:</label>
+      <input type="text" name="season" id="season" value="<%=flower.season%>" />
+
+      <button class="form-button" type="submit">
+        Update <%= flower.name %>
+      </button>
+    </form>
   </body>
 </html>
