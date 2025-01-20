@@ -12,30 +12,31 @@
     <h1>Flower Library</h1>
     <ul class="flower-library">
       <% allFlowers.forEach((flower) => { %>
-      <li>
+      <div class="library-item">
         <img
           class="library-image"
           src="<%= flower.image_url %>"
           alt="<%= flower.name %>"
         />
-        <a class="flower-link" href="/flower-library/<%= flower._id %>">
+        <a class="flower-link-library" href="/flower-library/<%= flower._id %>">
           <%= flower.name %>
         </a>
         <% if (user) { %>
         <form action="/flower-library/<%=flower._id%>/add-flower" method="POST">
           <label for="choose-recipe">Add to Recipe:</label>
-          <select name="recipe" id="recipe" required>
+          <select name="recipe" id="recipe" required class="flower-select">
             <option value="" disabled selected>-- Select Recipe --</option>
             <option value="Recipe1">Recipe 1</option>
             <option value="Recipe2">Recipe 2</option>
             <option value="Recipe3">Recipe 3</option>
             <option value="Recipe4">Recipe 4</option>
           </select>
-          <button type="submit">Add</button>
+          <button class="add-button" type="submit">Add</button>
         </form>
         <% } %>
-      </li>
+      </div>
       <% }) %>
+    </div>
     </ul>
   </body>
 </html>

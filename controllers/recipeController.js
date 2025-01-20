@@ -69,21 +69,25 @@ router.route("/recipe/:id").delete(async function (req, res, next) {
   try {
     // find flower id
     const flowerId = req.body.flowerId;
-    const recipeiD = req.params.id;
+    const recipeId = req.params.id;
 
     const recipe = await Recipe.findById(recipeId);
 
-    //   remove flower from the recipe's flower array
-    recipe.flower = recipe.flower.filter(
-      (flower) => flower.toString() !== flowerId
+    //   find flower and turn objectId into string
+    const flowerIndex = recipe.flower.findIndex(
+      (flower) => flower.toString() === flowerId
     );
+
+    //   *if there are multiples of the same flower
+    //   flower only removed if it exists in array
+    if (flowerIndex !== -1) {
+      recipe.flower.splice(flowerIndex, 1); // Remove only one
+    }
 
     //   save updated recipe
     await recipe.save();
 
-    await Flower.findByIdAndDelete(flowerId);
-
-    res.redirect(`/recipe-library/${recipe}`);
+    res.redirect(`/recipe-library/${recipeId}`);
   } catch (e) {
     next(e);
   }

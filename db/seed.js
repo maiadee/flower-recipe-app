@@ -34,7 +34,8 @@ async function seed() {
     { name: `Recipe 4`, user: user }
   );
 
-  // add data to database
+  // add data to database 
+  // ! can i do this alphabetically?
   const newFlowers = await Flower.create(flowers);
   console.log(newFlowers);
 

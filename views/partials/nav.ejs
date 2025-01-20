@@ -1,13 +1,17 @@
 <nav>
-  <a class="nav-bar-link" href="/">Home</a>
-  <a class="nav-bar-link" href="/flower-library">Flower Library</a>
-  <a class="nav-bar-link" href="/new">Add a New Flower</a>
+  <div class="general-links">
+    <a class="nav-bar-link" href="/">Home</a>
+    <a class="nav-bar-link" href="/flower-library">Flower Library</a>
+    <a class="nav-bar-link" href="/new">Add a New Flower</a>
+  </div>
   <!-- *if statement to show links -->
-  <% if (!user) { %>
-  <a class="nav-bar-link" href="/user/new">Sign Up</a>
-  <a class="nav-bar-link" href="/user/login">Log In</a>
-  <% } %> <% if (user) { %>
-  <a class="nav-bar-link" href="/recipe-library">My Recipes</a>
-  <a class="nav-bar-link" href="/user/logout">Log Out</a>
-  <% } %>
+  <div class="user-links">
+    <% if (!user) { %>
+    <a class="nav-bar-link" href="/user/new">Sign Up</a>
+    <a class="nav-bar-link" href="/user/login">Log In</a>
+    <% } %> <% if (user) { %>
+    <a class="nav-bar-link" href="/recipe-library">My Recipes</a>
+    <a class="nav-bar-link" href="/user/logout">Log Out</a>
+    <% } %>
+  </div>
 </nav>
