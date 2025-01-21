@@ -34,6 +34,21 @@ nav {
   top: 0; /* Ensure sticky behavior starts at the top */
 }
 
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.homepage-header {
+  font-size: 50px;
+}
+
+.app-intro {
+  max-width: 50%;
+}
+
 .general-links,
 .user-links {
   display: flex;
@@ -286,7 +301,8 @@ button:active {
   gap: 40px;
 }
 
-.flower-form {
+.flower-form,
+.user-form {
   max-width: 700px;
   margin: 50px auto;
   padding: 20px;
@@ -294,11 +310,13 @@ button:active {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
-.flower-form label {
+.flower-form label,
+.user-form label {
   display: block;
   margin-bottom: 5px;
 }
-.flower-form input {
+.flower-form input,
+.user-form input {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -306,6 +324,13 @@ button:active {
   border-radius: 4px;
   font-size: 14px;
   box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.user-form p {
+  text-align: right;
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .comment-add {
