@@ -1,6 +1,7 @@
 import express from "express";
 import Flower from "../models/flower.js";
 import Recipe from "../models/recipe.js";
+import { startSession } from "mongoose";
 
 const router = express.Router();
 
@@ -14,13 +15,37 @@ router.route("/").get(async function (req, res, next) {
   }
 });
 
-// GET library of flowers
+// GET filter flower search
+
 router.route("/flower-library").get(async function (req, res, next) {
   try {
-    const allFlowers = await Flower.find().exec();
-    res.render("flowers/index.ejs", {
-      allFlowers: allFlowers,
-    });
+    console.log(`hello`);
+    // get colour and season from the query parameters
+    const { color, season } = req.query;
+
+    // create an empty query object to build the MongoDB query
+    let query = {};
+
+    // if colour is selected, filter flowers by those colours
+    if (color && Array.isArray(color)) {
+      // mongo query
+      query.color = { $in: color };
+    } else if (color) {
+      // if only one colour is delected
+      query.color = color;
+    }
+
+    if (season && Array.isArray(season)) {
+      query.season = { $in: season };
+    } else if (season) {
+      query.season = season;
+    }
+    console.log(query);
+
+    // execute query on Flower model
+    const flowers = await Flower.find(query);
+    console.log(flowers);
+    res.render("flowers/index.ejs", { allFlowers: flowers });
   } catch (e) {
     next(e);
   }
@@ -109,5 +134,7 @@ router.route("/flower-library/:id").delete(async function (req, res, next) {
     next(e);
   }
 });
+
+
 
 export default router;

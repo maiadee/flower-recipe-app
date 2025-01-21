@@ -10,64 +10,85 @@
   <body>
     <%- include('../partials/nav') %>
     <h1><%= flower.name %></h1>
-    <h2>( <%= flower.scientific_name %> )</h2>
-    <img
-      class="profile-image"
-      src="<%= flower.image_url %>"
-      alt="<%= flower.name %>"
-    />
-    <p>Season: <%= flower.season %></p>
-    <p>Colour: <%= flower.color %></p>
-    <h3>Comments</h3>
-    <ul>
-      <% flower.comments.forEach(comment => { %>
-      <li><%= comment.content %></li>
 
-      <!-- if the user posted the comment, display a delete button -->
-      <% if (user && comment.user.toString() === user._id.toString()) { %>
-      <form
-        action="/flower-library/<%= flower._id %>/comments/<%= comment._id %>?_method=DELETE"
-        method="POST"
-      >
-        <button type="submit">Delete Comment</button>
-      </form>
-      <% } %> <% }) %>
-    </ul>
-    <!-- check if user is logged in -->
-    <% if (user) { %>
-    <form
-      class="comments-form"
-      action="/flower-library/<%=flower._id%>/comments"
-      method="POST"
-    >
-      <label for="comments">Comments:</label>
-      <input type="text" name="content" id="content" />
-      <button class="form-button" type="submit">Post</button>
-    </form>
+    <h2 class="scientific-name">( <%= flower.scientific_name %> )</h2>
+    <div class="flower-profile">
+      <div class="image-season-colour-comments">
+        <img
+          class="profile-image"
+          src="<%= flower.image_url %>"
+          alt="<%= flower.name %>"
+        />
+        <div class="season-colour-comments">
+          <p><strong>Season: </strong><%= flower.season %></p>
+          <p><strong>Colour: </strong><%= flower.color %></p>
+          <div class="comment-section">
+            <ul>
+              <% flower.comments.forEach(comment => { %>
+              <li><%= comment.content %></li>
 
-    <form action="/flower-library/<%=flower._id%>/add-flower" method="POST">
-      <label for="choose-recipe">Add to Recipe:</label>
-      <select name="recipe" id="recipe" required>
-        <option value="" disabled selected>-- Select Recipe --</option>
-        <option value="Recipe1">Recipe 1</option>
-        <option value="Recipe2">Recipe 2</option>
-        <option value="Recipe3">Recipe 3</option>
-        <option value="Recipe4">Recipe 4</option>
-      </select>
-      <button type="submit">Add</button>
-    </form>
+              <!-- if the user posted the comment, display a delete button -->
+              <% if (user && comment.user.toString() === user._id.toString()) {
+              %>
+              <form
+                action="/flower-library/<%= flower._id %>/comments/<%= comment._id %>?_method=DELETE"
+                method="POST"
+              >
+                <button class="delete-comment" type="submit">
+                  Delete Comment
+                </button>
+              </form>
+              <% } %> <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- check if user is logged in -->
+      <div class="comment-add">
+        <% if (user) { %>
 
-    <form action="/flower-library/<%=flower._id%>?_method=DELETE" method="POST">
-      <button class="delete-flower-button" type="submit">
-        Delete <%= flower.name %>
-      </button>
-    </form>
+        <form
+          class="comments-form"
+          action="/flower-library/<%=flower._id%>/comments"
+          method="POST"
+        >
+          <label for="comments">Comments:</label>
+          <input type="text" name="content" id="content" />
+          <button class="comment-button" type="submit">Post</button>
+        </form>
 
-    <!-- Link to take us to the new edit page at /flower/update/:id -->
-    <a class="update-flower-link" href="/flower-library/update/<%=flower._id%>"
-      >Update flower</a
-    >
+        <form class="select-form" action="/flower-library/<%=flower._id%>/add-flower" method="POST">
+          <label for="choose-recipe">Add to Recipe:</label>
+          <select name="recipe" id="recipe" required>
+            <option value="" disabled selected>-- Select Recipe --</option>
+            <option value="Recipe1">Recipe 1</option>
+            <option value="Recipe2">Recipe 2</option>
+            <option value="Recipe3">Recipe 3</option>
+            <option value="Recipe4">Recipe 4</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="delete-update">
+        <form
+          action="/flower-library/<%=flower._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="delete-flower-button" type="submit">
+            Delete <%= flower.name %>
+          </button>
+        </form>
+        <form
+          action="/flower-library/update/<%=flower._id%>?_method=GET"
+          method="GET"
+        >
+          <button class="update-flower-button" type="submit">
+            Update <%= flower.name %>
+          </button>
+        </form>
 
-    <% } %>
+        <% } %>
+      </div>
+    </div>
   </body>
 </html>

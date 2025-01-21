@@ -7,10 +7,16 @@
     <title>Document</title>
   </head>
   <body>
-    <%- include('./partials/nav') %> <% if (user) { %>
-    <h1><%= user.username %>'s Flower Recipe App</h1>
-    <% } %> <% if (!user) { %>
-    <h1>Welcome To The Flower Recipe App</h1>
-    <% } %>
+    <%- include('./partials/nav') %>
+
+    <h1 class="homepage-header">Floral Folio</h1>
+
+    <p class="app-intro">
+      Floral Folio is your go-to tool for designing and planning flower
+      arrangements. Our flower library lets you explore colours and textures
+      before committing to a purchase. Add flowers to your recipes, tweak your
+      choices, and visualise your arrangement – all without the stress of
+      rushing through a webshop checkout.
+    </p>
   </body>
 </html>

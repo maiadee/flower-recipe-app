@@ -7,9 +7,6 @@ router
   .route("/flower-library/:id/comments")
   .post(async function (req, res, next) {
     try {
-      if (comment.content === "") {
-        res.status(400).send({ message: "You cannot post a empty comment" });
-      }
       // give the comment a user
       req.body.user = req.session.user;
 

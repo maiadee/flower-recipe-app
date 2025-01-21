@@ -10,33 +10,102 @@
   <body>
     <%- include('../partials/nav') %>
     <h1>Flower Library</h1>
-    <ul class="flower-library">
-      <% allFlowers.forEach((flower) => { %>
-      <div class="library-item">
-        <img
-          class="library-image"
-          src="<%= flower.image_url %>"
-          alt="<%= flower.name %>"
-        />
-        <a class="flower-link-library" href="/flower-library/<%= flower._id %>">
-          <%= flower.name %>
-        </a>
-        <% if (user) { %>
-        <form action="/flower-library/<%=flower._id%>/add-flower" method="POST">
-          <label for="choose-recipe">Add to Recipe:</label>
-          <select name="recipe" id="recipe" required class="flower-select">
-            <option value="" disabled selected>-- Select Recipe --</option>
-            <option value="Recipe1">Recipe 1</option>
-            <option value="Recipe2">Recipe 2</option>
-            <option value="Recipe3">Recipe 3</option>
-            <option value="Recipe4">Recipe 4</option>
-          </select>
-          <button class="add-button" type="submit">Add</button>
+    <div class="library-container">
+      <div class="filter-form">
+        <h4>Filter Search</h4>
+        <form action="/flower-library" method="GET">
+          <div class="filter-section">
+            <h5>Colour</h5>
+            <label>
+              <input type="checkbox" name="color" value="White" />White
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Pink" />Pink
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Yellow" />Yellow
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Peach" />Peach
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Red" />Red
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Maroon" />Maroon
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Orange" />Orange
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Green" />Green
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Blue" />Blue
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Purple" />Purple
+            </label>
+          </div>
+          <div class="filter-section">
+            <h5>Season</h5>
+            <label>
+              <input type="checkbox" name="season" value="Spring" />Spring
+            </label>
+            <label>
+              <input type="checkbox" name="season" value="Summer" />Summer
+            </label>
+            <label>
+              <input type="checkbox" name="season" value="Autumn" />Autumn
+            </label>
+            <label>
+              <input type="checkbox" name="season" value="Winter" />Winter
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="season"
+                value="Year-round"
+              />Year-round
+            </label>
+          </div>
+          <button class="filter-button" type="submit">Add Filter</button>
         </form>
-        <% } %>
       </div>
-      <% }) %>
+      <div class="flower-library">
+        <% allFlowers.forEach((flower) => { %>
+        <div class="library-item">
+          <img
+            class="library-image"
+            src="<%= flower.image_url %>"
+            alt="<%= flower.name %>"
+          />
+          <a
+            class="flower-link-library"
+            href="/flower-library/<%= flower._id %>"
+          >
+            <%= flower.name %>
+          </a>
+          <% if (user) { %>
+          <form
+            class="select-form"
+            action="/flower-library/<%=flower._id%>/add-flower"
+            method="POST"
+          >
+            <label for="choose-recipe">Add to Recipe:</label>
+            <select name="recipe" id="recipe" required class="flower-select">
+              <option value="" disabled selected>-- Select Recipe --</option>
+              <option value="Recipe1">Recipe 1</option>
+              <option value="Recipe2">Recipe 2</option>
+              <option value="Recipe3">Recipe 3</option>
+              <option value="Recipe4">Recipe 4</option>
+            </select>
+            <button class="add-button" type="submit">Add</button>
+          </form>
+          <% } %>
+        </div>
+        <% }) %>
+      </div>
     </div>
-    </ul>
   </body>
 </html>

@@ -11,7 +11,11 @@
     <h1><%= recipe.name %></h1>
     <div class="grid-container">
       <% recipe.flower.forEach(flower => { %>
-      <div class="recipe-item">
+      <div
+        class="recipe-item"
+        draggable="true"
+        data-id="<%= flower._id %>"
+      >
         <img
           class="recipe-image"
           src="<%= flower.image_url %>"

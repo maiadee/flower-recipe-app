@@ -46,14 +46,13 @@ nav {
   font-weight: bold;
 }
 
-/* a {
-  color: #3a282e;
-  text-decoration: none;
-} */
-
-label {
-  color: #3a282e;
-  font-size: 12px;
+.library-container {
+  display: grid; /* Using grid layout for parent container */
+  grid-template-columns: 1fr 3fr; /* 1 part for filter, 3 parts for flower items */
+  gap: 20px; /* Space between filter and flower items */
+  padding: 20px; /* Padding around the grid */
+  max-width: 1200px; /* Optional: Limit the width of the library */
+  margin: 0 auto; /* Center the grid */
 }
 
 .flower-library {
@@ -63,10 +62,80 @@ label {
 }
 
 .library-image {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.filter-form {
+  background-color: #f3f2ed; /* White background for the form */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the form */
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  margin: 20px auto; /* Centre the form */
+  height: auto;
+}
+
+.filter-form h4 {
+  text-align: center;
+  font-size: 20px;
+  background: #3a282e; /* Heading color */
+  color: #f3f2ed;
+  margin-bottom: 20px;
+  margin-top: 20px; /* Space between title and form fields */
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section h5 {
+  font-size: 14px;
+  color: #3a282e; /* Section header color */
+  margin-bottom: 10px; /* Space between section title and checkboxes */
+}
+
+.filter-section label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%; /* Make the button fit the entire width of the container */
+  background: #3a282e; /* Dark background for the button */
+  color: #f3f2ed; /* Light color for the text */
+  padding: 12px 0; /* Vertical padding with 0 for horizontal to make it fit better */
+  border: none; /* Remove any borders */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 14px; /* Slightly larger text for better readability */
+  cursor: pointer; /* Pointer cursor to indicate it's clickable */
+  transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover */
+  margin-top: 15px; /* Space above the button */
+}
+
+button:hover {
+  background: #705d6b;
+  transform: scale(1.05); /* Slight zoom effect for interactivity */
+}
+
+button:active {
+  background: #52454e;
+}
+
+.delete-comment {
+  font-size: 10px;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .flower-link-library {
@@ -81,10 +150,39 @@ label {
 }
 
 .profile-image {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.recipe-library {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 20px;
+  margin: 20px;
+}
+
+.recipe-library li {
+  background-color: #f3f2ed;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-library li:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.recipe-link:hover {
+  color: #705d6b; /* Change colour on hover */
 }
 
 .recipe-link {
@@ -103,18 +201,15 @@ label {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
-  padding: 50px;
+  gap: 5px;
+  padding: 20px;
   background: #f3f2ed;
   width: 100%;
 }
 
-/* Styling the individual grid items */
 .recipe-item {
-  /* background: #f0e8e8;  */
   border-radius: 8px;
   padding: 10px;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,13 +234,109 @@ label {
   color: #3a282e;
 }
 
-.delete-flower-button {
+.comment-button {
+  margin-bottom: 20px;
+}
+
+.delete-flower-button,
+.update-flower-button {
   background-color: #3a282e; /* Red background */
   color: #e9e7da; /* White text */
-  padding: 8px;
+  padding: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-left: 12px;
-  font-size: 10px;
+
+  font-size: 12px;
+}
+
+.scientific-name {
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.flower-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.image-season-colour-comments {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+.season-colour-comments {
+  padding: 30px;
+  background: #f3f2ed;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.delete-update {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  gap: 40px;
+}
+
+.flower-form {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #f3f2ed;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.flower-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+.flower-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.comment-add {
+  background: #f3f2ed;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 450px;
+}
+
+.comment-add label {
+  padding: 5px;
+}
+
+.comment-add input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.comment-add button {
+  padding: 8px 0;
+}
+
+.select-form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.select-form label {
+  font-size: 14px;
 }

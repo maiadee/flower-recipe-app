@@ -42,7 +42,7 @@ export default [
   {
     name: "Rose (Bounty Way)",
     scientific_name: "Rosa",
-    color: "Lilac",
+    color: "Purple",
     season: "Spring",
     image_url:
       "https://www.flowersuppliers.co.uk/images/thumbs/0001825_rose-bounty-way_510.jpeg",
