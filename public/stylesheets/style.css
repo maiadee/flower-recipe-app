@@ -400,3 +400,12 @@ button:active {
   max-width: fit-content;
   padding: 10px;
 }
+
+.error-message {
+  text-align: center;
+  margin: 50px;
+}
+
+.error-message button {
+  max-width: 30%;
+}

@@ -7,7 +7,12 @@
     <title>Document</title>
   </head>
   <body>
-    <%- include('./partials/nav') %>
-    <h1>You must be logged in to do that!</h1>
+    <%- include('../partials/nav') %>
+    <div class="error-message">
+      <h1>You must be logged in to do that!</h1>
+      <form action="/user/login?_method=GET" method="GET">
+        <button type="submit">Log In?</button>
+      </form>
+    </div>
   </body>
 </html>

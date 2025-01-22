@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="error-message">
+      <h2>Oops</h2>
+      <h3>Incorrect email or password</h3>
+      <form action="/user/login?_method=GET" method="GET">
+        <button type="submit">Try Again?</button>
+      </form>
+    </div>
+  </body>
+</html>

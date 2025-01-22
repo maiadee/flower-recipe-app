@@ -93,15 +93,6 @@ router.route("/flower-library/update/:id").get(async function (req, res, next) {
   }
 });
 
-// GET errors page
-
-router.route("/error").get(async function (req, res, next) {
-  try {
-    res.render("error.ejs");
-  } catch (e) {
-    next(e);
-  }
-});
 
 // PUT update flower data
 

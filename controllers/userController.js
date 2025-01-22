@@ -26,10 +26,7 @@ router.route("/user/new").post(async function (req, res, next) {
     const { password, passwordConfirmation } = req.body;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      return res.status(400).send({
-        message:
-          "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one symbol.",
-      });
+      return res.redirect("/signup-error");
     }
 
     if (password !== passwordConfirmation) {
@@ -50,9 +47,14 @@ router.route("/user/new").post(async function (req, res, next) {
 router.route("/user/login").post(async function (req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email });
+
+    // Check if user exists
+    if (!user) {
+      return res.redirect("/login-fail");
+    }
+
     if (!user.isPasswordValid(req.body.password)) {
-      // ! edit this so an alart shows up saying login failed
-      return res.status(401).send({ message: "Unauthorized" });
+      return res.redirect("/login-fail");
     }
     req.session.user = user;
     res.redirect("/");
@@ -67,6 +69,36 @@ router.route("/user/logout").get(async function (req, res, next) {
   try {
     req.session.destroy();
     res.redirect("/user/login");
+  } catch (e) {
+    next(e);
+  }
+});
+
+// GET errors page
+
+router.route("/error").get(async function (req, res, next) {
+  try {
+    res.render("errors/loginerror.ejs");
+  } catch (e) {
+    next(e);
+  }
+});
+
+// GET sign up error page
+
+router.route("/signup-error").get(async function (req, res, next) {
+  try {
+    res.render("errors/signupError.ejs");
+  } catch (e) {
+    next(e);
+  }
+});
+
+// GET log in fail page
+
+router.route("/login-fail").get(async function (req, res, next) {
+  try {
+    res.render("errors/loginFail.ejs");
   } catch (e) {
     next(e);
   }
