@@ -26,28 +26,23 @@ async function seed() {
     password: "Maia1234!",
   });
 
-  // seed a recipe
-  const recipe = await Recipe.create(
-    { name: `Recipe 1`, user: user },
-    { name: `Recipe 2`, user: user },
-    { name: `Recipe 3`, user: user },
-    { name: `Recipe 4`, user: user }
-  );
+  // // seed a recipe
+  // const recipe = await Recipe.create(
+  //   { name: `Recipe 1`, user: user },
+  //   { name: `Recipe 2`, user: user },
+  //   { name: `Recipe 3`, user: user },
+  //   { name: `Recipe 4`, user: user }
+  // );
 
-  // add data to database 
+  await Recipe.create({ name: `Recipe 1`, user: user });
+  await Recipe.create({ name: `Recipe 2`, user: user });
+  await Recipe.create({ name: `Recipe 3`, user: user });
+  await Recipe.create({ name: `Recipe 4`, user: user });
+
+  // add data to database
   // ! can i do this alphabetically?
   const newFlowers = await Flower.create(flowers);
   console.log(newFlowers);
-
-  // ! does this work?
-  // seed comments
-  const comment = {
-    content: `test comment`,
-    user: user,
-  };
-
-  // push to the comment arrays
-  newFlowers[0].comments.push(comment);
 
   // save it back to the database
   await newFlowers[0].save();

@@ -6,7 +6,7 @@ import methodOverride from "method-override";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import commentController from "./controllers/commentController.js";
+import noteController from "./controllers/noteController.js";
 import flowerController from "./controllers/flowerController.js";
 import userController from "./controllers/userController.js";
 import recipeController from "./controllers/recipeController.js";
@@ -57,7 +57,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // use controllers
 app.use("/", userController);
 app.use("/", flowerController);
-app.use("/", commentController);
+app.use("/", noteController);
 app.use("/", recipeController);
 
 // listening for requests on port 3000

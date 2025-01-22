@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const commentSchema = new mongoose.Schema({
+const noteSchema = new mongoose.Schema({
   content: {
     type: String,
-    required: [true, "You can't post an empty comment!"],
+    required: [true, "You can't post an empty note!"],
   },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
@@ -28,7 +28,7 @@ const flowerSchema = new mongoose.Schema({
     ],
   },
   image_url: { type: String, required: true },
-  comments: [commentSchema],
+  notes: [noteSchema],
 });
 
 export default mongoose.model("Flower", flowerSchema);

@@ -9,13 +9,10 @@
   <body>
     <%- include('../partials/nav') %>
     <h1><%= recipe.name %></h1>
+
     <div class="grid-container">
       <% recipe.flower.forEach(flower => { %>
-      <div
-        class="recipe-item"
-        draggable="true"
-        data-id="<%= flower._id %>"
-      >
+      <div class="recipe-item" draggable="true" data-id="<%= flower._id %>">
         <img
           class="recipe-image"
           src="<%= flower.image_url %>"
@@ -32,6 +29,30 @@
         </div>
       </div>
       <% }) %>
+    </div>
+    <div class="recipe-notes-section">
+      <h3>Notes:</h3>
+      <ul>
+        <% recipe.notes.forEach(note => { %>
+        <li><%= note.content %></li>
+
+        <form
+          action="/recipe-library/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="recipe-delete-note" type="submit">Delete Note</button>
+        </form>
+        <% }) %>
+      </ul>
+      <form
+        class="notes-form"
+        action="/recipe-library/<%=recipe._id%>/notes"
+        method="POST"
+      >
+        <label for="notes">Notes:</label>
+        <input type="text" name="content" id="content" required />
+        <button class="note-button" type="submit">Post</button>
+      </form>
     </div>
   </body>
 </html>

@@ -19,6 +19,7 @@ router.route("/").get(async function (req, res, next) {
 
 router.route("/flower-library").get(async function (req, res, next) {
   try {
+    // return sorted alphabetically
     console.log(`hello`);
     // get colour and season from the query parameters
     const { color, season } = req.query;
@@ -90,15 +91,20 @@ router.route("/flower-library/update/:id").get(async function (req, res, next) {
   }
 });
 
+// GET errors page
+
+router.route("/error").get(async function (req, res, next) {
+  try {
+    res.render("error.ejs");
+  } catch (e) {
+    next(e);
+  }
+});
+
 // PUT update flower data
 
 router.route("/flower-library/update/:id").put(async function (req, res, next) {
   try {
-    if (!req.session.user) {
-      return res
-        .status(402)
-        .send({ message: "You must be logged in to do that" });
-    }
     const flowerId = req.params.id;
     const flower = await Flower.findById(flowerId, req.body, {
       new: true,
@@ -112,7 +118,7 @@ router.route("/flower-library/update/:id").put(async function (req, res, next) {
 
     await Flower.findByIdAndUpdate(flowerId);
     // !change to that particular flower use template literals
-    res.redirect("/flower-library");
+    res.redirect(`/flower-library/${flower._id}`);
   } catch (e) {
     next(e);
     console.log(e);
@@ -123,7 +129,6 @@ router.route("/flower-library/update/:id").put(async function (req, res, next) {
 
 router.route("/flower-library/:id").delete(async function (req, res, next) {
   try {
-    // find data matching id
     const id = req.params.id;
     const deleteFlower = await Flower.findById(id);
 
@@ -135,6 +140,20 @@ router.route("/flower-library/:id").delete(async function (req, res, next) {
   }
 });
 
+//  * POST new flower
 
+router.route("/flower-library/new").post(async function (req, res, next) {
+  try {
+    if (!req.session.user) {
+      return res.redirect("/error");
+    }
+
+    await Flower.create(req.body);
+
+    res.redirect("/flower-library");
+  } catch (e) {
+    next(e);
+  }
+});
 
 export default router;

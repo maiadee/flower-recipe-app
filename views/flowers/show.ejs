@@ -13,30 +13,27 @@
 
     <h2 class="scientific-name">( <%= flower.scientific_name %> )</h2>
     <div class="flower-profile">
-      <div class="image-season-colour-comments">
+      <div class="image-season-colour-notes">
         <img
           class="profile-image"
           src="<%= flower.image_url %>"
           alt="<%= flower.name %>"
         />
-        <div class="season-colour-comments">
+        <div class="season-colour-notes">
           <p><strong>Season: </strong><%= flower.season %></p>
           <p><strong>Colour: </strong><%= flower.color %></p>
-          <div class="comment-section">
+          <div class="notes-section">
             <ul>
-              <% flower.comments.forEach(comment => { %>
-              <li><%= comment.content %></li>
+              <% flower.notes.forEach(note => { %>
+              <li><%= note.content %></li>
 
               <!-- if the user posted the comment, display a delete button -->
-              <% if (user && comment.user.toString() === user._id.toString()) {
-              %>
+              <% if (user && note.user.toString() === user._id.toString()) { %>
               <form
-                action="/flower-library/<%= flower._id %>/comments/<%= comment._id %>?_method=DELETE"
+                action="/flower-library/<%= flower._id %>/notes/<%= note._id %>?_method=DELETE"
                 method="POST"
               >
-                <button class="delete-comment" type="submit">
-                  Delete Comment
-                </button>
+                <button class="delete-note" type="submit">Delete Note</button>
               </form>
               <% } %> <% }) %>
             </ul>
@@ -44,20 +41,24 @@
         </div>
       </div>
       <!-- check if user is logged in -->
-      <div class="comment-add">
+      <div class="note-add">
         <% if (user) { %>
 
         <form
-          class="comments-form"
-          action="/flower-library/<%=flower._id%>/comments"
+          class="notes-form"
+          action="/flower-library/<%=flower._id%>/notes"
           method="POST"
         >
-          <label for="comments">Comments:</label>
-          <input type="text" name="content" id="content" />
-          <button class="comment-button" type="submit">Post</button>
+          <label for="notes">Notes:</label>
+          <input type="text" name="content" id="content" required />
+          <button class="note-button" type="submit">Post</button>
         </form>
 
-        <form class="select-form" action="/flower-library/<%=flower._id%>/add-flower" method="POST">
+        <form
+          class="select-form"
+          action="/flower-library/<%=flower._id%>/add-flower"
+          method="POST"
+        >
           <label for="choose-recipe">Add to Recipe:</label>
           <select name="recipe" id="recipe" required>
             <option value="" disabled selected>-- Select Recipe --</option>
