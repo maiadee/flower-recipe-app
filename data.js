@@ -61,7 +61,7 @@ export default [
     color: "Peach",
     season: "Spring",
     image_url:
-      "https://hollandamericaflowers.com/wp-content/uploads/2018/09/Tulip-Peach.jpg",
+      "https://www.trianglenursery.co.uk/pictures/products/medium/Tulips-Gambino-39cm.jpg?v=637244673779795027",
   },
   {
     name: "Tulip",

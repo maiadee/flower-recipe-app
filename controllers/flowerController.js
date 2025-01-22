@@ -30,10 +30,12 @@ router.route("/flower-library").get(async function (req, res, next) {
     // if colour is selected, filter flowers by those colours
     if (color && Array.isArray(color)) {
       // mongo query
-      query.color = { $in: color };
+      query.color = {
+        $in: color.map((c) => new RegExp(`^${c}$`, "i")), // Create regex for each colour - case insensitive
+      };
     } else if (color) {
       // if only one colour is delected
-      query.color = color;
+      query.color = new RegExp(`^${color}$`, "i");
     }
 
     if (season && Array.isArray(season)) {
@@ -106,22 +108,13 @@ router.route("/error").get(async function (req, res, next) {
 router.route("/flower-library/update/:id").put(async function (req, res, next) {
   try {
     const flowerId = req.params.id;
-    const flower = await Flower.findById(flowerId, req.body, {
-      new: true,
-    }).populate("user");
+    const flower = await Flower.findById(flowerId);
 
-    if (!flower.user._id.equals(req.session.user._id)) {
-      return res
-        .status(402)
-        .send({ message: "This is not your flower to update!" });
-    }
+    await Flower.findByIdAndUpdate(flowerId, req.body);
 
-    await Flower.findByIdAndUpdate(flowerId);
-    // !change to that particular flower use template literals
     res.redirect(`/flower-library/${flower._id}`);
   } catch (e) {
     next(e);
-    console.log(e);
   }
 });
 

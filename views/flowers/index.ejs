@@ -72,15 +72,20 @@
           </div>
           <button class="filter-button" type="submit">Add Filter</button>
         </form>
+        <form action="/flower-library?_method=GET" method="GET">
+          <button class="clear-filter" type="submit">Clear Filter</button>
+        </form>
       </div>
       <div class="flower-library">
         <% allFlowers.forEach((flower) => { %>
         <div class="library-item">
-          <img
-            class="library-image"
-            src="<%= flower.image_url %>"
-            alt="<%= flower.name %>"
-          />
+          <a href="/flower-library/<%= flower._id %>">
+            <img
+              class="library-image"
+              src="<%= flower.image_url %>"
+              alt="<%= flower.name %>"
+            />
+          </a>
           <a
             class="flower-link-library"
             href="/flower-library/<%= flower._id %>"
