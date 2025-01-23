@@ -4,13 +4,13 @@ import User from "../models/user.js";
 import flowers from "../data.js";
 import Recipe from "../models/recipe.js";
 
+import dotenv from "dotenv";
+dotenv.config(); // initalises .env
+
 async function seed() {
   console.log(`hello seed`);
 
-  // connect to mongoose
-  const url = "mongodb://127.0.0.1:27017/";
-  const dbname = "flower-recipe-db";
-  await mongoose.connect(`${url}${dbname}`);
+  await mongoose.connect(process.env.MONGODB_URI);
 
   console.log(`connected to mongoose`);
 
@@ -32,7 +32,7 @@ async function seed() {
   await Recipe.create({ name: `Recipe 4`, user: user });
 
   // add data to database
-  // ! can i do this alphabetically?
+
   const newFlowers = await Flower.create(flowers);
   console.log(newFlowers);
 

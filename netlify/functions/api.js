@@ -14,8 +14,6 @@ import flowerController from "../../controllers/flowerController.js";
 import userController from "../../controllers/userController.js";
 import recipeController from "../../controllers/recipeController.js";
 
-import flowers from "./data.js";
-
 import dotenv from "dotenv";
 dotenv.config(); // initalises .env
 
@@ -33,10 +31,6 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({
-      mongoUrl: "mongodb://localhost:27017/flower-recipe-db",
-      collectionName: "sessions", // Optional: specify the collection name
-    }),
     cookie: {
       secure: false, // is this using HTTPS
       httpOnly: true,
