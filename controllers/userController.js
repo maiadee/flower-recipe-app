@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/user.js";
+import Recipe from "../models/recipe.js";
 
 const router = express.Router();
 
@@ -33,7 +34,12 @@ router.route("/user/new").post(async function (req, res, next) {
       return res.status(400).send({ message: "Passwords do not match" });
     }
     // create document in database
-    await User.create(req.body);
+    const user = await User.create(req.body);
+
+    await Recipe.create({ name: `Recipe 1`, user: user });
+    await Recipe.create({ name: `Recipe 2`, user: user });
+    await Recipe.create({ name: `Recipe 3`, user: user });
+    await Recipe.create({ name: `Recipe 4`, user: user });
 
     res.redirect("/user/login");
   } catch (e) {

@@ -20,10 +20,9 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(mongooseUniqueValidator);
 
 userSchema.pre("save", function (next) {
-  // this = doc youre about to save
-  // replace password with hashed password
-  this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync());
-  // tell mongoose we're done
+  if (this.isModified("password")) {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync());
+  }
   next();
 });
 

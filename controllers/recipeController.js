@@ -8,7 +8,10 @@ const router = express.Router();
 
 router.route("/recipe-library").get(async function (req, res, next) {
   try {
-    const allRecipes = await Recipe.find().exec();
+    const user = req.session.user;
+    // console.log(user);
+
+    const allRecipes = await Recipe.find({ user: user._id }).exec();
     res.render("flowers/recipeIndex.ejs", {
       allRecipes: allRecipes,
     });
@@ -43,15 +46,22 @@ router
   .route("/flower-library/:id/add-flower")
   .post(async function (req, res, next) {
     try {
+      const user = req.session.user;
       const flowerId = req.params.id;
       const selectedRecipe = req.body.recipe;
 
       const slicedRecipe =
         selectedRecipe.slice(0, 6) + " " + selectedRecipe.slice(6);
 
-      // finding one recipe in my array
-      const recipe = await Recipe.findOne({ name: slicedRecipe });
+      const recipes = await Recipe.find({ user: user._id });
 
+      // finding the sliced recipe in that users recipes
+      const recipe = recipes.find((recipe) => {
+        if (recipe.name === slicedRecipe) {
+          return recipe;
+        }
+      });
+      console.log(recipe);
       const flowerFromDb = await Flower.findById(flowerId);
 
       recipe.flower.push(flowerFromDb);

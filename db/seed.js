@@ -26,14 +26,6 @@ async function seed() {
     password: "Maia1234!",
   });
 
-  // // seed a recipe
-  // const recipe = await Recipe.create(
-  //   { name: `Recipe 1`, user: user },
-  //   { name: `Recipe 2`, user: user },
-  //   { name: `Recipe 3`, user: user },
-  //   { name: `Recipe 4`, user: user }
-  // );
-
   await Recipe.create({ name: `Recipe 1`, user: user });
   await Recipe.create({ name: `Recipe 2`, user: user });
   await Recipe.create({ name: `Recipe 3`, user: user });

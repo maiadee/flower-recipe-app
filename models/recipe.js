@@ -9,7 +9,7 @@ const recipeNoteSchema = new mongoose.Schema({
 });
 
 const recipeSchema = new mongoose.Schema({
-  name: { type: String, unique: true },
+  name: { type: String },
   flower: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Flower", required: true },
   ],
