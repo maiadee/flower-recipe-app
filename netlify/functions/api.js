@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import MongoStore from "connect-mongo";
 import session from "express-session";
 import methodOverride from "method-override";
 import MongoStore from "connect-mongo";
@@ -18,10 +17,6 @@ import dotenv from "dotenv";
 dotenv.config(); // initalises .env
 
 mongoose.connect(process.env.MONGODB_URI);
-
-// Define __dirname in ES module scope
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
