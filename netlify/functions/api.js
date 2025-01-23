@@ -12,6 +12,7 @@ import noteController from "../../controllers/noteController.js";
 import flowerController from "../../controllers/flowerController.js";
 import userController from "../../controllers/userController.js";
 import recipeController from "../../controllers/recipeController.js";
+import errorHandler from "../../middleware/errorHandler.js";
 
 import dotenv from "dotenv";
 dotenv.config(); // initalises .env
