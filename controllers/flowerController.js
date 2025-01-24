@@ -19,8 +19,6 @@ router.route("/").get(async function (req, res, next) {
 
 router.route("/flower-library").get(async function (req, res, next) {
   try {
-    // return sorted alphabetically
-    console.log(`hello`);
     // get colour and season from the query parameters
     const { color, season } = req.query;
 
@@ -43,11 +41,10 @@ router.route("/flower-library").get(async function (req, res, next) {
     } else if (season) {
       query.season = season;
     }
-    console.log(query);
 
     // execute query on Flower model
     const flowers = await Flower.find(query);
-    console.log(flowers);
+
     res.render("flowers/index.ejs", { allFlowers: flowers });
   } catch (e) {
     next(e);
@@ -89,7 +86,6 @@ router.route("/flower-library/update/:id").get(async function (req, res, next) {
     res.render("flowers/update.ejs", { flower });
   } catch {
     next(e);
-    console.log(e);
   }
 });
 

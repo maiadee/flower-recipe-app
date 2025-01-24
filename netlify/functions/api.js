@@ -28,7 +28,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false, // is this using HTTPS
+      secure: false, // is this app using HTTPS
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // expires tomorrow
     },

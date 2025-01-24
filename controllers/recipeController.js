@@ -9,7 +9,6 @@ const router = express.Router();
 router.route("/recipe-library").get(async function (req, res, next) {
   try {
     const user = req.session.user;
-    // console.log(user);
 
     const allRecipes = await Recipe.find({ user: user._id }).exec();
     res.render("flowers/recipeIndex.ejs", {
@@ -27,7 +26,7 @@ router.route("/recipe-library/:id").get(async function (req, res, next) {
   try {
     const recipeId = req.params.id;
     const recipe = await Recipe.findById(recipeId).populate("flower");
-    console.log(recipe);
+
     res.render("flowers/recipe.ejs", {
       recipe: recipe,
     });
@@ -35,10 +34,6 @@ router.route("/recipe-library/:id").get(async function (req, res, next) {
     next(e);
   }
 });
-
-// make a post flower end point that pushes my flower into that recipes flower array
-// * will need to get the selected flower and push it
-// * then redirect to that recipe page
 
 // POST flower to recipe
 
@@ -61,12 +56,12 @@ router
           return recipe;
         }
       });
-      console.log(recipe);
+
       const flowerFromDb = await Flower.findById(flowerId);
 
       recipe.flower.push(flowerFromDb);
       await recipe.save();
-      console.log(recipe);
+
       res.redirect(`/recipe-library/${recipe._id}`);
     } catch (e) {
       next(e);
@@ -88,7 +83,7 @@ router.route("/recipe/:id").delete(async function (req, res, next) {
       (flower) => flower.toString() === flowerId
     );
 
-    //   *if there are multiples of the same flower
+    //   * if there are multiples of the same flower
     //   flower only removed if it exists in array
     if (flowerIndex !== -1) {
       recipe.flower.splice(flowerIndex, 1); // Remove only one

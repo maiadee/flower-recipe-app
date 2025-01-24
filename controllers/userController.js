@@ -44,7 +44,6 @@ router.route("/user/new").post(async function (req, res, next) {
     res.redirect("/user/login");
   } catch (e) {
     next(e);
-    console.log(e);
   }
 });
 

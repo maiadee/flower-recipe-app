@@ -10,7 +10,7 @@ router.route("/flower-library/:id/notes").post(async function (req, res, next) {
     req.body.user = req.session.user;
 
     const flower = await Flower.findById(req.params.id);
-    console.log(flower);
+
     //   push note to the body
     flower.notes.push(req.body);
     //   save on the database
@@ -59,9 +59,6 @@ router
 
 router.route("/recipe-library/:id/notes").post(async function (req, res, next) {
   try {
-    console.log(`hello`);
-    console.log(req.session.user, req.body);
-
     // Ensure the note has the required fields
     const note = {
       content: req.body.content, // Get content

@@ -30,8 +30,8 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: sticky; /* Stick the navbar to the top on scroll */
-  top: 0; /* Ensure sticky behavior starts at the top */
+  position: sticky;
+  top: 0;
 }
 
 .homepage {
@@ -67,12 +67,12 @@ nav {
 }
 
 .library-container {
-  display: grid; /* Using grid layout for parent container */
-  grid-template-columns: 1fr 3fr; /* 1 part for filter, 3 parts for flower items */
-  gap: 20px; /* Space between filter and flower items */
-  padding: 20px; /* Padding around the grid */
-  max-width: 1200px; /* Optional: Limit the width of the library */
-  margin: 0 auto; /* Center the grid */
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .flower-library {
@@ -89,23 +89,23 @@ nav {
 }
 
 .filter-form {
-  background-color: #f3f2ed; /* White background for the form */
-  border: 1px solid #ddd; /* Subtle border */
-  border-radius: 8px; /* Rounded corners */
-  padding: 20px; /* Padding inside the form */
+  background-color: #f3f2ed;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
   width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-  margin: 20px auto; /* Centre the form */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
   height: auto;
 }
 
 .filter-form h4 {
   text-align: center;
   font-size: 20px;
-  background: #3a282e; /* Heading color */
+  background: #3a282e;
   color: #f3f2ed;
   margin-bottom: 20px;
-  margin-top: 20px; /* Space between title and form fields */
+  margin-top: 20px;
   border: none;
   border-radius: 8px;
   padding: 12px 0;
@@ -117,8 +117,8 @@ nav {
 
 .filter-section h5 {
   font-size: 14px;
-  color: #3a282e; /* Section header color */
-  margin-bottom: 10px; /* Space between section title and checkboxes */
+  color: #3a282e;
+  margin-bottom: 10px;
 }
 
 .filter-section label {
@@ -130,21 +130,21 @@ nav {
 }
 
 button {
-  width: 100%; /* Make the button fit the entire width of the container */
-  background: #3a282e; /* Dark background for the button */
-  color: #f3f2ed; /* Light color for the text */
-  padding: 12px 0; /* Vertical padding with 0 for horizontal to make it fit better */
-  border: none; /* Remove any borders */
-  border-radius: 8px; /* Rounded corners */
-  font-size: 14px; /* Slightly larger text for better readability */
-  cursor: pointer; /* Pointer cursor to indicate it's clickable */
-  transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover */
-  margin-top: 15px; /* Space above the button */
+  width: 100%;
+  background: #3a282e;
+  color: #f3f2ed;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: 15px;
 }
 
 button:hover {
   background: #705d6b;
-  transform: scale(1.05); /* Slight zoom effect for interactivity */
+  transform: scale(1.05);
 }
 
 button:active {
@@ -200,12 +200,12 @@ button:active {
 }
 
 .recipe-library li:hover {
-  transform: translateY(-5px); /* Slight lift on hover */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .recipe-link:hover {
-  color: #705d6b; /* Change colour on hover */
+  color: #705d6b;
 }
 
 .recipe-link {
@@ -263,9 +263,8 @@ button:active {
 
 .delete-flower-button,
 .update-flower-button {
-  background-color: #3a282e; /* Red background */
-  color: #e9e7da; /* White text */
-  padding: 10px;
+  background-color: #3a282e;
+  color: #e9e7da;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -331,7 +330,7 @@ button:active {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
 }
 
 .user-form p {
@@ -393,7 +392,7 @@ button:active {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
 }
 
 .recipe-delete-note {
