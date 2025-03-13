@@ -14,16 +14,16 @@ body {
 }
 
 h1 {
-  color: #3a282e;
+  color: #31352e;
   text-align: center;
 }
 
 p {
-  color: #3a282e;
+  color: #31352e;
 }
 
 nav {
-  background: #3a282e;
+  background: #787d12;
   padding: 50px;
   width: 100%;
   display: flex;
@@ -102,7 +102,7 @@ nav {
 .filter-form h4 {
   text-align: center;
   font-size: 20px;
-  background: #3a282e;
+  background: #787d12;
   color: #f3f2ed;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -117,7 +117,7 @@ nav {
 
 .filter-section h5 {
   font-size: 14px;
-  color: #3a282e;
+  color: #31352e;
   margin-bottom: 10px;
 }
 
@@ -131,7 +131,7 @@ nav {
 
 button {
   width: 100%;
-  background: #3a282e;
+  background: #787d12;
   color: #f3f2ed;
   padding: 12px 0;
   border: none;
@@ -143,12 +143,12 @@ button {
 }
 
 button:hover {
-  background: #705d6b;
+  background: #626710;
   transform: scale(1.05);
 }
 
 button:active {
-  background: #52454e;
+  background: #626710;
 }
 
 .delete-note {
@@ -159,7 +159,7 @@ button:active {
 }
 
 .flower-link-library {
-  color: #3a282e;
+  color: #31352e;
   padding: 10px;
   font-weight: bold;
   text-decoration: none;
@@ -205,11 +205,11 @@ button:active {
 }
 
 .recipe-link:hover {
-  color: #705d6b;
+  color: #787d12;
 }
 
 .recipe-link {
-  color: #3a282e;
+  color: #31352e;
   text-decoration: none;
 }
 
@@ -254,7 +254,7 @@ button:active {
   text-decoration: none;
   margin-bottom: 8px;
   font-size: 12px;
-  color: #3a282e;
+  color: #31352e;
 }
 
 .note-button {
@@ -263,12 +263,12 @@ button:active {
 
 .delete-flower-button,
 .update-flower-button {
-  background-color: #3a282e;
+  background-color: #787d12;
   color: #e9e7da;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-
+  padding: 5px;
   font-size: 12px;
 }
 
