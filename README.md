@@ -46,34 +46,125 @@ Day 1
 - Started developing controllers and basic .ejs files for the app's views.
 
 Day 2
-- I got all my controllers working but ran into issues with mismatched links and ensuring the right pages (POST vs. GET) were accessed. ADD CODE.
+- I got all my controllers working but ran into issues with mismatched links and ensuring the right pages (POST vs. GET) were accessed.
+- I decided to add support for multiple recipes, creating a recipe page with links to each one, similar to the index and show pages. I added dropdown selectors to assign flowers to the correct recipe and created an "add to recipe" button. I used the slice() method to format recipe names and struggled with targeting the right flower array within the recipe.
 
-  
-- I decided to add support for multiple recipes, creating a recipe page with links to each one, similar to the index and show pages. I added dropdown selectors to assign flowers to the correct recipe and created an "add to recipe" button. I used the slice() method to format recipe names and struggled with targeting the right flower array within the recipe. ADD CODE.
+``` javascript 
+router
+  .route("/flower-library/:id/add-flower")
+  .post(async function (req, res, next) {
+    try {
+      const user = req.session.user;
+      const flowerId = req.params.id;
+      const selectedRecipe = req.body.recipe;
 
+      const slicedRecipe =
+        selectedRecipe.slice(0, 6) + " " + selectedRecipe.slice(6);
+
+      const recipes = await Recipe.find({ user: user._id });
+
+      const recipe = recipes.find((recipe) => {
+        if (recipe.name === slicedRecipe) {
+          return recipe;
+        }
+      });
+
+      const flowerFromDb = await Flower.findById(flowerId);
+
+      recipe.flower.push(flowerFromDb);
+      await recipe.save();
+
+      res.redirect(`/recipe-library/${recipe._id}`);
+    } catch (e) {
+      next(e);
+    }
+  });
+```
+- Here, I am extracting data from the logged-in user session, the flower ID, and retrieving the selected recipe from the form data. I use the slice() method to format the recipe name and then query the database for the user's recipes to find the one that matches the formatted name. Finally, I add the selected flower to that recipe's flower array, save and redirect.
+
+![FloralFolio](<ReadMe Images/floralfolio-select.png>)
   
 - I also had difficulty with the "delete from recipe" button, especially finding the flower ID within the recipe and handling duplicates.
 - After overcoming these challenges, I now have a better understanding of managing these features. Finally, I added basic styling with a neutral color palette for testing color combinations.
 
 Day 3
-- I spent the first half of the day adding a filter to allow users to filter flowers by color and season using checkboxes. I ensured the endpoint handled both multiple and single selections. I ran into issues with duplicate routes, so I replaced the original flower-library GET endpoint with the filtered one. ADD CODE.
+- I spent the first half of the day adding a filter to allow users to filter flowers by color and season using checkboxes. I ensured the endpoint handled both multiple and single selections. I ran into issues with duplicate routes, so I replaced the original flower-library GET endpoint with the filtered one.
 
+``` javascript
+router.route("/flower-library").get(async function (req, res, next) {
+  try {
+    const { color, season } = req.query;
+
+    let query = {};
+
+    if (color && Array.isArray(color)) {
+      query.color = {
+        $in: color.map((c) => new RegExp(`^${c}$`, "i")), 
+      };
+    } else if (color) {
+      query.color = new RegExp(`^${color}$`, "i");
+    }
+
+    if (season && Array.isArray(season)) {
+      query.season = { $in: season };
+    } else if (season) {
+      query.season = season;
+    }
+
+    const flowers = await Flower.find(query);
+
+    res.render("flowers/index.ejs", { allFlowers: flowers });
+  } catch (e) {
+    next(e);
+  }
+});
+```
+- In the code above I am extracting the query parameters, constructing a MongoDB query based on those parameters, executing the query to retrieve matching results, and then rendering the results on the page.
+
+![FloralFolio](<ReadMe Images/floralfolio-filter.png>)
 
 - I also spent time styling the library page, switching from ul to div elements after some trial and error. Finally, I styled all pages to keep the design clear and simple without interfering with the app's purpose.
 
 Day 4
-- I added a notes section to my recipe pages but realised I needed a new recipe notes schema in the recipe model for clarity. This took some time due to syntax errors and reseeding the data. ADD CODE.
+- I added a notes section to my recipe pages but realised I needed a new recipe notes schema in the recipe model for clarity. This took some time due to syntax errors and reseeding the data.
+  
+``` javascript
+const recipeNoteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: [true, "You can't post an empty note!"],
+  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+});
 
+const recipeSchema = new mongoose.Schema({
+  name: { type: String },
+  flower: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Flower", required: true },
+  ],
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  notes: [recipeNoteSchema],
+});
+```
+![FloralFolio](<ReadMe Images/floralfolio-recipenotes.png>)
+
+- I modified my recipeSchema to include an array of notes using the recipeNoteSchema. This allows each recipe to have multiple notes associated with it, ensuring better organisation and structure.
   
 - I finalized styling and fixed error messages to polish the app. I also tested different functionalities to identify potential issues and added error pages with redirects for better readability.
 - To improve UX/UI, I made the images on the library and recipe pages clickable.
 
 Day 5
-- I realised recipes weren’t correctly tied to the logged-in user, a pretty vital aspect of my app! I updated the POST endpoint to link flowers to the current user, their recipes, and the specific recipe. ADD CODE.
-
+- I realised recipes weren’t correctly tied to the logged-in user, a pretty vital aspect of my app! I updated the POST endpoint to link flowers to the current user, their recipes, and the specific recipe. In the code above from day 2 the following two lines of code were added to ensure that the recipes were linked to the currently logged-in user by querying for recipes where the user field matches the user's ID stored in the session -
+  
+``` javascript
+const user = req.session.user;
+const recipes = await Recipe.find({ user: user._id });
+```
   
 - I also updated the recipe schema to allow for multiple instances of "Recipe 1" and ensured that 4 recipes were created for each user on sign-up.
 - After deploying the app, I found build issues caused by multiple Mongoose imports, which I fixed to get the app running.
+
+![FloralFolio](<ReadMe Images/floralfolio-show.png>)
 
 ### Challenges
 
