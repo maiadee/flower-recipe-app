@@ -196,6 +196,7 @@ const recipes = await Recipe.find({ user: user._id });
 
 ### Future Improvements
 
+- Make the website mobile responsive
 - Add a search bar to my flower library
 - Combine flower profiles of the same flower with multiple colour choices. The image showing would depend on the colour selected by the user
 - Add larger text options to make app more accessible 
